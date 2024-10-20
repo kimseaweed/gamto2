@@ -1,8 +1,9 @@
 application-private.properties
 desktop.ini
 key.js
-
+.idea/
 build/
+.gradle/
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/windows,linux,eclipse,intellij,java
