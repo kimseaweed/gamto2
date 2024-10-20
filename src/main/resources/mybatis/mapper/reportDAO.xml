@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namesapce속성은 이 매퍼가 어떤 인터페이스와 관련된 매퍼인지 알려준다. -->
+<mapper namespace="com.mrmr.gamto.report.dao.IBookReportDAO">
+	<!-- id의 속성값은 인터페이스에 정의된 메서드의 이름, resultType 속성값은 리턴되는 값의 타입을 지정 -->
+	<select id="listDao"
+		resultType="com.mrmr.gamto.report.dto.BookReportDTO">
+		select * from book_report order by r_seq_number desc
+	</select>
+	<select id="viewDao"
+		resultType="com.mrmr.gamto.report.dto.BookReportDTO">
+		select * from book_report where r_seq_number=#{param1}
+	</select>
+	<!-- insert구문과 delete구문은 리턴되는 결과값이 없으므로 리턴타입을 지정 안함 => resultType 없음 -->
+	<insert id="writeDao">
+		insert into book_report
+		values(book_report_seq.nextval,#{param1},#{param2},sysdate,sysdate,#{param3},#{param4},#{param5},#{param6},#{param7})
+	</insert>
+	<delete id="deleteDao">
+		delete book_report where r_seq_number=#{param1}
+	</delete>
+	<update id="updateDao">
+		update book_report set r_title=#{item1},
+		r_content=#{item2},r_filename=#{item3}, r_update_day=sysdate where r_seq_number=#{item4}
+	</update>
+	<!-- 조회수를 카운트하는 update문 -->
+	<update id="updateCnt">
+		update book_report set r_view = r_view+1 where
+		r_seq_number = #{item1}
+	</update>
+	<!-- 게시판 좋아요 수가 올라가는 update문 -->
+	<update id="goodCnt">
+		update book_report set r_recommend = r_recommend+1 where r_seq_number = #{param1}
+	</update>
+	<!-- 좋아요 취소하는 update문 -->
+	<update id="badCnt">
+		update book_report set r_recommend = r_recommend-1 where r_seq_number = #{param1}
+	</update>
+	<select id="getPageList" parameterType="Map"
+		resultType="com.mrmr.gamto.report.dto.BookReportDTO">
+		select * from (
+		select rownum rn, book_report.*
+		from(
+		select* from book_report order by r_seq_number DESC) book_report)
+		WHERE RN BETWEEN #{startNo} AND #{endNo} and r_delete = '0'
+	</select>
+	<!-- 총 게시글 갯수 출력 -->
+	<select id="countBoard" resultType="int">
+		select count(*) from
+		book_report where r_delete = '0'
+	</select>
+	<select id="SearchTotal" parameterType="Map"
+		resultType="com.mrmr.gamto.report.dto.BookReportDTO">
+		select * from
+		(select rownum as rn, f.*
+		from(
+		select * from book_report where r_delete = 0 AND
+
+		<if test="item == 'r_title'">r_title like '%'||#{text}||'%'</if>
+		<if test="item == 'r_content'">r_content like '%'||#{text}||'%'</if>
+		<if test="item == 'r_writer'">r_writer like '%'||#{text}||'%'</if>
+
+		order by r_seq_number desc) f) where rn BETWEEN #{startNo} AND
+		#{endNo}
+	</select>
+	
+	<!-- 좋아요 테이블 -->
+	<!-- 게시글 추천시 like테이블에 insert -->
+	<insert id="insertLike">
+		insert into feeling values(l_seq_number.nextval,2,#{param1},#{param2},1)
+	</insert>
+	
+	<!-- 게시글 추천 취소시 delete -->
+	<delete id="deleteLike">
+		delete from feeling where l_board = 2 and l_number = #{param1} and l_id = #{param2}
+	</delete>
+	
+	<!-- 게시글 추천 중복 방지 -->
+	<select id="likeCheck" resultType="int">
+		select count(*) from feeling where l_board = 2 and l_number = #{param1} and l_id = #{param2}
+	</select>
+</mapper>

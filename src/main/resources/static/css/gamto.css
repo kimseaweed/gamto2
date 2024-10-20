@@ -1,0 +1,367 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+ul > li,
+ol > li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: currentColor;
+}
+
+.testbox{
+	border: 2px red solid;
+}
+
+/* 로고 글씨체 */
+@font-face {
+  font-family: "Yeongdo-Rg";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/Yeongdo-Rg.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+/* 네브 글씨체 */
+@font-face {
+  font-family: "116angmuburi";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.0/116angmuburi.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+/* 전체 글씨체 */
+@font-face {
+	font-family: "NanumSquareNeo-Variable";
+	src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.eot);
+	src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.eot?#iefix)
+	format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.woff)
+	format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.ttf) format("truetype");
+}
+/* write */
+@font-face {
+    font-family: '잉크립퀴드체';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/InkLipquid.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: '고딕아니고고딩';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/naverfont_05@1.0/Gothic_Goding.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: '한림명조체';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2204@1.0/HallymMjo-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+::selection {
+  background-color: rgb(236, 206, 0,0.4);
+  color: black;
+}
+
+/*당근커서*/
+.carrot {
+	transition:all 0.05s ease-out;
+	position: absolute;
+	z-index:9999;
+	width: 50px;
+	height: 50px;
+	top: 80%;
+	left: 80%;
+	margin: 10px 0 0 10px;
+	background-image: url("../img/logo/cursor1_mRD_icon.ico");
+	backface-visibility: hidden;
+	box-sizing: border-box;
+}
+
+/*배*/
+body {
+	font-family: "NanumSquareNeo-Variable";
+	background-image: url(data:image/png;base64,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);
+	color: rgb(60, 60, 60);
+	overflow-x: hidden;
+	overflow-y:scroll;
+}
+
+.draggable {
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+}
+
+/*밑줄효과*/
+.link2_green{	
+  background-image: linear-gradient(90deg, rgb(206, 236, 0,0.6),rgb(208, 250, 139,0.3));
+}
+.link2_blue{	
+  background-image: linear-gradient(90deg, rgb(123, 192, 255,0.5),rgb(139, 194, 250,0.2));
+}
+.link2-purple{	
+  background-image: linear-gradient(90deg, rgb(191, 128, 255,0.5),rgb(250, 139, 250,0.2));
+}
+.link2 {
+  text-decoration: none; 
+  backdrop-filter: blur(2px);
+  background-size: 0% 12px;
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  transition: background-size 0.5s ease;
+}
+.link2:hover {
+  background-size: 100% 12px;
+  background-position: left bottom;
+}
+
+/*custumBS*/
+.fs-7{
+	font-size: 12px;
+}
+.shadow-sm-hover{
+	border: var(--bs-border-width) var(--bs-border-style) rgb(0,0,0,0);
+}
+.shadow-sm-hover:hover{
+	box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
+	border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
+}
+.out-a{
+	display: block !important;
+}
+.bg-gray{
+	background-color:rgb(228, 228, 228) !important;
+}
+.h-500px{
+	height: 500px;
+}
+
+.bt-1-dot {
+	border-top-style: dotted;
+	border-top-width: 1px;
+}
+
+.bb-1-dot {
+	border-bottom-style: dotted;
+	border-bottom-width: 1px;
+}
+
+.bt-2-dot {
+	border-top-style: dotted;
+	border-top-width: 2px;
+}
+
+.bb-2-dot {
+	border-bottom-style: dotted;
+	border-bottom-width: 2px;
+}
+
+.bt-1-dash {
+	border-top-style: dashed;
+	border-top-width: 1px;
+}
+
+.bb-1-dash {
+	border-bottom-style: dashed;
+	border-bottom-width: 1px;
+}
+
+.bt-2-dash {
+	border-top-style: dashed;
+	border-top-width: 2px;
+}
+
+.bb-2-dash {
+	border-bottom-style: dashed;
+	border-bottom-width: 2px;
+}
+
+/*header*/
+
+.logobox a>span, .offcanvas-title{
+	font-family: "Yeongdo-Rg";
+}
+header > nav >ul>li>a{
+	font-family: "116angmuburi";
+	font-size: 2rem;
+	font-weight: bold;
+	letter-spacing: 3px;
+	word-spacing: -6px;
+}
+.logobox .img{
+	width:50px;
+	height: 86.5px;
+	background-repeat: no-repeat;
+	background-image: url("../img/logo/logo1.png");
+	background-size: contain;
+}
+header{
+	width: 100%;
+}
+header.d-lg-block span.badge{
+letter-spacing: -1px;	
+	font-size: 15px;
+	top: -12px;
+	z-index: 99999;
+}
+
+header.d-lg-none span.badge{
+	top:17px;
+	left: 35px;
+}
+/*스크롤탑버튼*/
+#sidebar{
+	z-index:9998;
+}
+#sidebar button{
+  width:50px;
+  height: 50px;
+  position: fixed;
+  padding: 5px;
+  border-width: 3px;
+  right: 30px;
+}
+#btn-back-to-top {
+  bottom: 30px;
+}
+#sidebar .material-symbols-outlined {
+font-size: 2rem;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 700,
+  'GRAD' 200,
+  'opsz' 48;
+}
+#searchSite{
+  bottom: 100px;
+}
+#shareLink{
+	bottom: 170px
+}
+	/*서치토스트*/
+	#searchToast{
+		width: 500px;
+	}
+
+
+
+
+/*헤더 데탑 */
+@media (min-width: 992px) {
+	header{
+		background-color: white;
+		background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXWBgYGHh4d5eXlzc3OLi4ubm5uVlZWPj4+NjY19fX2JiYl/f39ra2uRkZGZmZlpaWmXl5dvb29xcXGTk5NnZ2c8TV1mAAAAG3RSTlNAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAvEOwtAAAFVklEQVR4XpWWB67c2BUFb3g557T/hRo9/WUMZHlgr4Bg8Z4qQgQJlHI4A8SzFVrapvmTF9O7dmYRFZ60YiBhJRCgh1FYhiLAmdvX0CzTOpNE77ME0Zty/nWWzchDtiqrmQDeuv3powQ5ta2eN0FY0InkqDD73lT9c9lEzwUNqgFHs9VQce3TVClFCQrSTfOiYkVJQBmpbq2L6iZavPnAPcoU0dSw0SUTqz/GtrGuXfbyyBniKykOWQWGqwwMA7QiYAxi+IlPdqo+hYHnUt5ZPfnsHJyNiDtnpJyayNBkF6cWoYGAMY92U2hXHF/C1M8uP/ZtYdiuj26UdAdQQSXQErwSOMzt/XWRWAz5GuSBIkwG1H3FabJ2OsUOUhGC6tK4EMtJO0ttC6IBD3kM0ve0tJwMdSfjZo+EEISaeTr9P3wYrGjXqyC1krcKdhMpxEnt5JetoulscpyzhXN5FRpuPHvbeQaKxFAEB6EN+cYN6xD7RYGpXpNndMmZgM5Dcs3YSNFDHUo2LGfZuukSWyUYirJAdYbF3MfqEKmjM+I2EfhA94iG3L7uKrR+GdWD73ydlIB+6hgref1QTlmgmbM3/LeX5GI1Ux1RWpgxpLuZ2+I+IjzZ8wqE4nilvQdkUdfhzI5QDWy+kw5Wgg2pGpeEVeCCA7b85BO3F9DzxB3cdqvBzWcmzbyMiqhzuYqtHRVG2y4x+KOlnyqla8AoWWpuBoYRxzXrfKuILl6SfiWCbjxoZJUaCBj1CjH7GIaDbc9kqBY3W/Rgjda1iqQcOJu2WW+76pZC9QG7M00dffe9hNnseupFL53r8F7YHSwJWUKP2q+k7RdsxyOB11n0xtOvnW4irMMFNV4H0uqwS5ExsmP9AxbDTc9JwgneAT5vTiUSm1E7BSflSt3bfa1tv8Di3R8n3Af7MNWzs49hmauE2wP+ttrq+AsWpFG2awvsuOqbipWHgtuvuaAE+A1Z/7gC9hesnr+7wqCwG8c5yAg3AL1fm8T9AZtp/bbJGwl1pNrE7RuOX7PeMRUERVaPpEs+yqeoSmuOlokqw49pgomjLeh7icHNlG19yjs6XXOMedYm5xH2YxpV2tc0Ro2jJfxC50ApuxGob7lMsxfTbeUv07TyYxpeLucEH1gNd4IKH2LAg5TdVhlCafZvpskfncCfx8pOhJzd76bJWeYFnFciwcYfubRc12Ip/ppIhA1/mSZ/RxjFDrJC5xifFjJpY2Xl5zXdguFqYyTR1zSp1Y9p+tktDYYSNflcxI0iyO4TPBdlRcpeqjK/piF5bklq77VSEaA+z8qmJTFzIWiitbnzR794USKBUaT0NTEsVjZqLaFVqJoPN9ODG70IPbfBHKK+/q/AWR0tJzYHRULOa4MP+W/HfGadZUbfw177G7j/OGbIs8TahLyynl4X4RinF793Oz+BU0saXtUHrVBFT/DnA3ctNPoGbs4hRIjTok8i+algT1lTHi4SxFvONKNrgQFAq2/gFnWMXgwffgYMJpiKYkmW3tTg3ZQ9Jq+f8XN+A5eeUKHWvJWJ2sgJ1Sop+wwhqFVijqWaJhwtD8MNlSBeWNNWTa5Z5kPZw5+LbVT99wqTdx29lMUH4OIG/D86ruKEauBjvH5xy6um/Sfj7ei6UUVk4AIl3MyD4MSSTOFgSwsH/QJWaQ5as7ZcmgBZkzjjU1UrQ74ci1gWBCSGHtuV1H2mhSnO3Wp/3fEV5a+4wz//6qy8JxjZsmxxy5+4w9CDNJY09T072iKG0EnOS0arEYgXqYnXcYHwjTtUNAcMelOd4xpkoqiTYICWFq0JSiPfPDQdnt+4/wuqcXY47QILbgAAAABJRU5ErkJggg==);
+		z-index: 999;
+	}
+	header nav{
+		margin: 0 auto;		
+		max-width: 1320px;
+		
+	}
+	.logobox:hover .img{
+		background-image: url("../img/logo/logo1_closed.png");
+		background-size: contain;
+	}
+	main{
+		margin-top: 125px;
+	}
+}
+/*헤더 랩탑,모바일*/
+@media (max-width: 991px) {
+	header  nav  ul li a{
+	font-family: "116angmuburi";
+	}
+	.logobox .img{
+		width: 45px;
+		height: 70px;
+	}
+	main{
+		margin-top: 95px;
+	}
+}
+
+/* 상점페이지 리본 */
+ .ribbon-wrapp {
+	 position: relative;
+  }
+ .ribbon{	  
+    position: absolute;
+    color: white;
+	z-index:9;
+    bottom: 35px;
+    padding: 3px 30px;
+    background: #00B3ED;
+    box-shadow: -1px 2px 3px rgba(0,0,0,.3);
+    
+  }
+.ribbon:before {
+	 content: "";
+	 position: absolute;
+     width: 7px;
+     height: 120%;
+     top: 0;
+     left: -6.5px;
+     bottom: -10px;
+     padding: 0 0 7px;
+     background: inherit;
+     border-radius: 5px 0 0 5px;
+}
+  .ribbon:after {
+	  content: "";
+	  position: absolute;
+	    width: 5px;
+	    height: 5px;
+	    bottom: -5px;
+	    left: -4.5px;
+	    background: lightblue;
+	    border-radius: 5px 0 0 5px;
+}
+  
+
+@media (min-width: 768px) {
+	main.store h3.fs-2{
+		font-size: 1.5rem !important;
+	}
+}
+
+.b_list-thumbnail{
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+}
+.b_list-thumbnail>img{
+	position: absolute;
+	top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.kkoPay {
+	background-image:
+		url("../img/book/kakao/payment_icon_yellow_small_none.png");
+	background-size: 95px;
+	background-position: center;
+	background-repeat: no-repeat;
+	width: 120px;
+	height: 50px;
+}
+.buyForm .countPrice button{
+	width:20px;
+}
+.buyForm .countPrice input{
+	width: 20px;
+}
+.move-img{
+	transition: all .5s;
+}
+.b-table td, .b-table th{
+	padding-left: 1.5rem;
+}
+
+.caro-img{
+	position: relative;
+	left: 50%;
+	top: 10%;
+	transform: translateX(-50%);
+}

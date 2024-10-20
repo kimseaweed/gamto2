@@ -1,0 +1,72 @@
+plugins {
+	id 'java'
+	id 'war'
+	id 'org.springframework.boot' version '3.1.2'
+	id 'io.spring.dependency-management' version '1.1.2'
+}
+
+group = 'com.mrmr.gamto'
+version = '1.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	//스프링부트웹
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	//마이바티스
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.2'
+	//롬복
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	//톰캣
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	//jakarta jstl
+    implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.0'
+    implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
+    //데브툴
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	// commonsio
+	// https://mvnrepository.com/artifact/commons-io/commons-io
+	implementation 'commons-io:commons-io:2.13.0'
+	// json
+	// https://mvnrepository.com/artifact/org.json/json
+	implementation 'org.json:json:20231013'
+	// 메일발송
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+	// JWT 발급관련 : xml bind
+	implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.0'
+	// JWT 발급관련 : json web token lib
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+	//오라클클라우드관련
+	// https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc11
+	implementation 'com.oracle.database.jdbc:ojdbc11:23.3.0.23.09'
+	// https://mvnrepository.com/artifact/com.oracle.database.security/oraclepki
+	implementation 'com.oracle.database.security:oraclepki:23.5.0.24.07'
+	// https://mvnrepository.com/artifact/com.oracle.database.security/osdt_cert
+	implementation 'com.oracle.database.security:osdt_cert:21.11.0.0'
+	// https://mvnrepository.com/artifact/com.oracle.database.security/osdt_core
+	implementation 'com.oracle.database.security:osdt_core:21.11.0.0'
+
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

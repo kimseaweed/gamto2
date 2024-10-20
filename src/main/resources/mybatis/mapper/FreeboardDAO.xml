@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mrmr.gamto.freeboard.dao.IFreeboardDAO">
+	<!-- 자유게시판 리스트 (삭제 번호가 0인 목록)-->
+	<!-- 페이징 처리 후 게시글 조회 -->
+	<select id="getPageList"  parameterType="Map" resultType="com.mrmr.gamto.freeboard.dto.FreeboardDTO">
+    select * from (
+        	select 	rownum rn, free_board.*
+        		from(
+        			select* from free_board where f_delete = 0 order by f_seq_number DESC) free_board)
+        	WHERE RN BETWEEN #{startNo} AND #{endNo} 		
+	</select>
+	<!-- 총 게시글 갯수 출력 -->
+	<select id="countBoard" resultType="int">
+		select count(*) from free_board where f_delete = '0'
+	</select>
+	<!-- 선택된 게시판의 상세 정보가 보여지는 페이지 -->
+	<select id="viewDao" resultType="com.mrmr.gamto.freeboard.dto.FreeboardDTO">
+		select * from free_board where f_seq_number=#{0}
+	</select>
+	<!-- 게시판 작성 -->
+	<insert id="writeDao">
+		insert into free_board values(free_board_seq.nextval,#{item1},#{item2},sysdate,sysdate,0,0,0,#{item3},#{item4})
+	</insert>
+	<!-- 게시판 수정 -->
+	<update id="updateDao">
+		update free_board set f_title = #{item1}, f_content = #{item2}, f_category = #{item3}, f_update_day = sysdate, f_view = f_view-1 where f_seq_number = #{item4}
+	</update>
+	<!-- 조회수를 카운트하는 update문 -->
+	<update id="updateCnt">
+		update free_board set f_view = f_view+1 where f_seq_number = #{item1}
+	</update>
+	<!-- 게시판 좋아요 수가 올라가는 update문 -->
+	<update id="goodCnt">
+		update  free_board set f_recommend = f_recommend+1 where f_seq_number = #{param1}
+	</update>
+	<!-- 좋아요 취소하는 update문 -->
+	<update id="badCnt">
+		update  free_board set f_recommend = f_recommend-1 where f_seq_number = #{param1}
+	</update>
+	<!-- 삭제를 원하면 삭제 번호가 1로 변경되면서 목록에서는 보이지 않음 -->
+	<update id="deleteDao">
+		update free_board set f_delete ='1' where f_seq_number = #{item1}
+	</update>
+	
+	<!-- 댓글 리스트 (삭제 번호가 0인 목록) -->
+	<select id="cListDao" resultType="com.mrmr.gamto.freeboard.dto.CommentDTO">
+		select * from comment_board where f_seq_number=#{item1} and c_delete = 0 order by c_seq_number desc
+	</select>
+	<!-- 댓글 갯수 -->
+	<select id="commentTotal" resultType="int">
+		select count(*) from comment_board where f_seq_number = #{item1} and c_delete = 0 
+	</select>
+	<!-- 댓글 작성 -->
+	<insert id="cWriteDao">
+		insert into comment_board values(comment_board_seq.nextval,#{param1},#{param2},sysdate,sysdate,0,0,0,#{param3},0)
+	</insert>
+	<!-- 댓글 수정 -->
+	<update id="cUpdateDao">
+		update comment_board set c_content = #{item1}, c_update_day = sysdate where c_seq_number = #{item2}
+	</update>
+	<!-- 댓글 좋아요 수가 올라가는 update문 -->
+	<update id="cGoodCnt">
+		update comment_board set c_recommend = c_recommend+1 where c_seq_number = #{param1}
+	</update>
+	<!-- 댓글 좋아요 수가 취소하는 update문 -->
+	<update id="cGoodCancel">
+		update comment_board set c_recommend = c_recommend-1 where c_seq_number = #{param1}
+	</update>
+	
+	<!-- 댓글 싫어요 수가 올라가는 update문 -->
+	<update id="cBadCnt">
+		update comment_board set c_derecommend = c_derecommend+1 where c_seq_number = #{param1}
+	</update>
+	<!-- 댓글 싫어요 수를 취소하는 update문 -->
+	<update id="cBadCancel">
+		update comment_board set c_derecommend = c_derecommend-1 where c_seq_number = #{param1}
+	</update>
+	<!-- 댓글 삭제를 원하면 삭제 번호가 1로 변경되면서 목록에서는 보이지 않음 -->
+	<update id="cDeleteDao">
+		update comment_board set c_delete = 1 where c_seq_number = #{param1}
+	</update>
+	
+	<!-- 페이징 처리 후 카테고리 검색 게시글 조회 -->
+	<select id="SearchCategory"  parameterType="Map" resultType="com.mrmr.gamto.freeboard.dto.FreeboardDTO">
+   select * from (
+        	select 	rownum rn, free_board.*
+        		from(
+        			select* from free_board where f_delete = '0' order by f_seq_number DESC) free_board)
+        	WHERE RN BETWEEN #{startNo} AND #{endNo} and f_category = #{category}
+	</select>
+	
+	<!-- 페이징 처리 후 주제별 검색 게시글 조회 -->
+	<select id="SearchTotal"  parameterType="Map" resultType="com.mrmr.gamto.freeboard.dto.FreeboardDTO">
+  	select * from 
+   		(select rownum as rn, f.* 
+   			from(
+   				select * from free_board where f_delete = 0 AND
+   				
+   					<if test="item == 'f_title'">f_title like '%'||#{text}||'%'</if> 
+   					<if test="item == 'f_content'">f_content like '%'||#{text}||'%'</if> 
+   					<if test="item == 'f_writer'">f_writer like '%'||#{text}||'%'</if> 
+   				
+   					 order by f_seq_number desc) f) where rn BETWEEN #{startNo} AND #{endNo}	
+	</select>
+	
+	
+	
+	
+	
+	<!-- 좋아요 테이블 -->
+	<!-- 게시글 추천시 like테이블에 insert -->
+	<insert id="insertLike">
+		insert into feeling values(l_seq_number.nextval,#{param1},#{param2},#{param3},1)
+	</insert>
+	
+	<!-- 게시글 추천 취소시 delete -->
+	<delete id="deleteLike">
+		delete from feeling where l_board = #{param1} and l_number = #{param2} and l_id = #{param3}
+	</delete>
+	
+	<!-- 게시글 추천 중복 방지 -->
+	<select id="likeCheck" resultType="int">
+		select count(*) from feeling where l_board = #{param1} and l_number = #{param2} and l_id = #{param3}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+</mapper>

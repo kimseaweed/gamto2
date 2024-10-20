@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace속성은 이 매퍼가 어떤 인터페이스와 관련된 매퍼인지를 알려준다. -->
+<mapper namespace="com.mrmr.gamto.member.dao.MemberDAO">
+	<select id="listDao" resultType="com.mrmr.gamto.member.dto.MemberDTO">
+      select * from member_function order by id desc
+   </select>
+  	<select id="loginDao" resultType="com.mrmr.gamto.member.dto.MemberDTO">
+        select * from member_function where u_id = #{param1} and u_pw=#{param2}
+	</select>
+<!--	<insert id="addMemberDao">-->
+<!--        insert into member_function values(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7})-->
+<!--	</insert>-->
+	<insert id="addMemberDao">
+		insert into member_function (u_id, u_pw, u_name, u_phone, u_email, u_address, u_delete)
+		values (#{dto.u_id}, #{dto.u_pw}, #{dto.u_name}, #{dto.u_phone}, #{dto.u_email}, #{dto.u_address}, 0)
+	</insert>
+	<update id="deleteMemberDao">
+		update member_function set u_delete=1 where u_id=#{param1}
+	</update>
+	<select id="readMemberDao" resultType="com.mrmr.gamto.member.dto.MemberDTO">
+        select * from member_function where u_id=#{param1}
+	</select>
+	<update id="updateMemberDao">
+		update member_function set u_pw=#{dto.u_pw}, u_name=#{dto.u_name}, u_phone=#{dto.u_phone} , u_email=#{dto.u_email}, u_address=#{dto.u_address} where u_id=#{dto.u_id}
+	</update>
+	<select id="overlapIdDao" resultType="com.mrmr.gamto.member.dto.MemberDTO">
+        select u_id from member_function where u_id=#{param1}
+	</select>
+	<select id="overlapMailDao" resultType="com.mrmr.gamto.member.dto.MemberDTO">
+        select u_email from member_function where u_email=#{param1}
+	</select>
+	<select id="findIdDao" resultType="com.mrmr.gamto.member.dto.MemberDTO"><!-- 아이디 찾기 -->
+        select * from member_function where u_email=#{param1}
+	</select>
+	<select id="ResetPwCheck" resultType="String"><!-- 비번찾기 : 기존비번 확인 -->
+        select u_pw from member_function where u_id=#{param1}
+	</select>
+	<update id="ResetPwDo"><!-- 비번찾기 : 변경해주기 확인 -->
+		update member_function set u_pw=#{param2} where u_id=#{param1}
+	</update>
+	<!-- <select id="MyBoardDao" resultType="com.mrmr.gamto.member.dto.MyBoardDTO">
+		(select r_seq_number as seq_number, '나의생각' as tablename, r_title as title, r_regist_day as regist_day from book_report where r_writer = #{param1} and r_delete=0)
+		union
+		(select f_seq_number as seq_number, '우리생각' as tablename, f_title as title, f_regist_day as regist_day from free_board where f_writer = #{param1} and f_delete=0)
+	</select> -->
+	<select id="getPageList"  parameterType="Map" resultType="com.mrmr.gamto.member.dto.MyBoardDTO">
+	    select my.*
+		from (select rownum as rm, m.* from ((select r_seq_number as seq_number, '나의생각' as tablename, r_title as title, r_regist_day as regist_day from book_report where r_writer = #{param1} and r_delete=0)
+		union
+		(select f_seq_number as seq_number, '우리생각' as tablename, f_title as title, f_regist_day as regist_day from free_board where f_writer = #{param1} and f_delete=0)) m) my
+		where rm BETWEEN #{param2} AND #{param3}
+	</select>
+	<!-- 총 게시글 갯수 출력 -->
+	<select id="countBoard" resultType="int">
+		select count(*)
+		from (select rownum as rm, m.* from (
+		(select r_seq_number as seq_number, '나의생각' as tablename, r_title as title, r_regist_day as regist_day from book_report where r_writer = #{param1} and r_delete=0)
+		union
+		(select f_seq_number as seq_number, '우리생각' as tablename, f_title as title, f_regist_day as regist_day from free_board where f_writer = #{param1} and f_delete=0)
+		) m)
+	</select>
+	
+</mapper>

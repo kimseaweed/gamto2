@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace속성은 이 매퍼가 어떤 인터페이스와 관련된 매퍼인지를 알려준다. -->
+<mapper namespace="com.mrmr.gamto.store.dao.StoreDAO">
+	<!-- id속성은 인터페이스의 메소드를 가져온다. resultType의 속성값은 리턴되는 값의 타입을 지정한다. -->
+    <!-- store페이지 리스트 -->
+	<select id="BookList"
+		resultType="com.mrmr.gamto.store.dto.StoreDTO">
+		select * from book_info
+	</select>
+	<!-- 페이징 처리 후 제품 조회 -->
+	<select id="getPageList"  parameterType="Map" resultType="com.mrmr.gamto.store.dto.StoreDTO">
+    select * from (select rownum rn, book_info.* from(select * from book_info order by b_seq_number DESC) book_info) WHERE RN BETWEEN #{startNo} AND #{endNo} and b_delete = '0'		
+	</select>
+	<!-- 총 제품 갯수 출력 -->
+	<select id="countBookList" resultType="int">
+		select count(*) from book_info
+	</select>
+    <!-- 상세 페이지 -->
+	<select id="viewDao"
+		resultType="com.mrmr.gamto.store.dto.StoreDTO">
+		select * from book_info where b_code = #{param1}
+	</select>
+    <!-- 제품 삭제 -->
+	<delete id="deleteDao">
+		delete book_info where b_code = #{param1}
+	</delete>
+
+	<!-- 장바구니 -->
+	<select id="cartDao" resultType="com.mrmr.gamto.store.dto.CartDTO">
+	select cart.cart_code as cart_code, book_info.b_name as cart_name, book_info.b_filename as cart_filename, book_info.b_price as cart_price, book_info.b_author as cart_author, cart.cart_quantity as cart_quantity FROM cart join book_info on cart.cart_code = book_info.b_code where cart_id = #{param1} and cart_quantity > 0
+	</select>
+    <!-- 장바구니에 담기  -->
+	<update id="addCartDao">
+		MERGE INTO cart USING (SELECT b_code, b_name,
+		b_filename, b_price FROM book_info WHERE b_code = #{param2}) bi ON
+		(cart.cart_code = bi.b_code and cart.cart_id = #{param1})
+		WHEN MATCHED THEN
+		UPDATE SET
+		cart.cart_quantity = cart.cart_quantity+#{param3} where cart_code = #{param2}
+		WHEN NOT MATCHED THEN
+		INSERT
+		(cart.cart_seq_number, cart.cart_id, cart.cart_code, cart.cart_quantity)
+		VALUES (cart_seq.nextVal, #{param1}, #{param2}, #{param3})
+	</update>
+	<!-- 장바구니에서 수량 변경  -->
+	<update id="updateQuantity">
+		update cart set cart_quantity = #{param3} where cart_code = #{param2} and cart_id=#{param1}
+	</update>
+    <!-- 장바구니 삭제  -->
+	<update id="removeCartDao">
+		update cart set cart_quantity=0 where cart_id = #{param1} and cart_code= #{param2}
+	</update>
+
+    <!-- 장바구니 전체 삭제 --> 
+	<update id="removeAllCartDao">
+		update cart set cart_quantity=0 where cart_id = #{param1}
+	</update>
+	<!-- 페이징 처리 후 주제별 검색 게시글 조회 -->
+	<select id="SearchTotal"  parameterType="Map" resultType="com.mrmr.gamto.store.dto.StoreDTO">
+  		select * from 
+   		(select rownum as rn, f.* 
+   			from(
+   				select * from book_info where b_delete = 0 AND 
+   				    <if test="item == 'all'">b_name like '%'||#{text}||'%' or b_author like '%'||#{text}||'%' or b_publisher like '%'||#{text}||'%' or b_code like '%'||#{text}||'%'</if>
+   				    <if test="item == 'b_name'">b_name like '%'||#{text}||'%'</if> 
+   					<if test="item == 'b_author'">b_author like '%'||#{text}||'%'</if> 
+   					<if test="item == 'b_publisher'">b_publisher like '%'||#{text}||'%'</if> 
+   					<if test="item == 'b_code'">b_code like '%'||#{text}||'%'</if> 
+   					 order by b_seq_number desc) f) where rn BETWEEN #{startNo} AND #{endNo}
+	</select>
+	
+	<select id="listNumDao" resultType="int">
+	   select count(cart_code) from cart where cart_quantity>0 and cart_id = #{param1}
+	</select>
+
+	<!-- 구매내역 db에 저 -->
+    <insert id="insertKakaoPayInfo" parameterType="com.mrmr.gamto.store.dto.OrderTableDTO">
+    	insert into order_table values(#{o_order_number}, #{o_address}, #{o_name}, #{o_book_name}, #{o_total}, #{o_price}, #{o_quantity}, #{o_phone}, #{o_order_code})
+    </insert>
+    <!-- 구매 내역 뽑아내기 -->
+    <select id="orderList" resultType="com.mrmr.gamto.store.dto.OrderTableDTO">
+         select * from order_table where o_order_number = #{o_order_number}
+    </select>
+    <!-- kakaoPay에 데이터 보냄 -->
+    <select id="orderDetail" resultType="com.mrmr.gamto.member.dto.MemberDTO">
+    select * from member_function where u_id=#{u_id}
+    </select>
+    
+    <select id="purchaseList" resultType="com.mrmr.gamto.store.dto.OrderTableDTO">
+    	select * from order_table where o_name = #{o_name}
+    </select>
+</mapper>

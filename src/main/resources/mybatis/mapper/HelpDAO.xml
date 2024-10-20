@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mrmr.gamto.help.dao.HelpDAO">
+<!-- 문의접수  -->
+<insert id="insertAskDao">
+insert into ask(a_id,a_category,a_content,a_filename,a_email,a_reception)
+values(#{dto.a_id},#{dto.a_category},#{dto.a_content},#{dto.a_filename},#{dto.a_email},#{dto.a_reception})
+</insert>
+<!-- 신고접수 -->
+<insert id="insertAccuseDao">
+insert into accuse(ac_id,ac_target,ac_category,ac_content,ac_filename)
+values(#{dto.ac_id},#{dto.ac_target},#{dto.ac_category},#{dto.ac_content},#{dto.ac_filename})
+</insert>
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mrmr.gamto.write.dao.WriteDAO">
+	<insert id="writeBookReport">
+		insert into book_report(
+			r_seq_number,r_filename,r_title,r_writer,r_content
+		) values(
+			book_report_seq.nextval,#{dto.r_filename},#{dto.r_title},#{dto.r_writer},#{dto.r_content})
+	</insert>
+	<update id="updateBookReport">
+		update book_report set r_title=#{dto.r_title},
+		r_content=#{dto.r_content},r_filename=#{dto.r_filename}, r_update_day=sysdate where r_seq_number=#{dto.r_seq_number}
+	</update>
+</mapper>	
