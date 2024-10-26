@@ -255,10 +255,6 @@ $('#writeForm').on('submit', function(event) {
 		alertY('제목을 입력해주세요');
 		$('input[name="r_title"]').focus();
 		return false;
-	} else if ($('input[name="r_title"]').val().length > 300) {
-		alertY('제목이 너무 길어요');
-		$('input[name="r_title"]').focus();
-		return false;
 	}else if ($('input[name="r_content"]').val().replaceAll(" ","") == "") {
 		alertY('내용을 입력해주세요');
 		$('input[name="r_content"]').focus();

@@ -43,7 +43,7 @@ function alertY(msg) {
 }
 
 /* 마우스 당근 */
-let x = 0,
+var x = 0,
 	y = 0,
 	mouseX = 0,
 	mouseY = 0,
@@ -83,13 +83,8 @@ $(".move-block").mouseout(function() {
 
 
 /* 사이드바 스크롤탑 */
-let mybutton = document.getElementById("btn-back-to-top");
-mybutton.addEventListener("click", backToTop);
-
-
-function backToTop() {
-	document.body.scrollTop = 0;
-	document.documentElement.scrollTop = 0;
+function backToTop(){
+	$('html, body').animate({ scrollTop: 0 }, 100);
 }
 
 /*사이드바 링크복사 */
