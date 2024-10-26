@@ -190,13 +190,16 @@ header > nav >ul>li>a{
 	letter-spacing: 3px;
 	word-spacing: -6px;
 }
-.logobox .img{
+.logobox .img,
+.img2
+{
 	width:50px;
 	height: 86.5px;
 	background-repeat: no-repeat;
 	background-image: url("../img/logo/logo1.png");
 	background-size: contain;
 }
+
 header{
 	width: 100%;
 }
@@ -213,7 +216,8 @@ header.d-lg-none span.badge{
 }
 /*스크롤탑버튼*/
 #sidebar{
-	z-index:9998;
+	position: absolute;
+	z-index:99999;
 }
 #sidebar button{
   width:50px;
@@ -364,4 +368,10 @@ font-size: 2rem;
 	left: 50%;
 	top: 10%;
 	transform: translateX(-50%);
+}
+
+/*addmember.jsp*/
+
+.t-addmember div{
+
 }

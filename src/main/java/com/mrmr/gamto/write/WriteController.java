@@ -36,9 +36,13 @@ public class WriteController {
 	}
 
 	@PostMapping("/report")
-	public String create(MultipartFile filename, BookReportDTO dto) throws Exception {
-		dto.setR_filename(service.saveFile(filename));
-		writedao.writeBookReport(dto);
+	public String create(MultipartFile filename, BookReportDTO dto) {
+		try {
+			dto.setR_filename(service.saveFile(filename));
+			writedao.writeBookReport(dto);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "redirect:/report";
 	}
 

@@ -64,6 +64,10 @@ dependencies {
 	// https://mvnrepository.com/artifact/com.oracle.database.security/osdt_core
 	implementation 'com.oracle.database.security:osdt_core:21.11.0.0'
 
+	//유효성검사
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
+	implementation 'org.springframework.boot:spring-boot-starter-validation:3.2.10'
+
 
 }
 

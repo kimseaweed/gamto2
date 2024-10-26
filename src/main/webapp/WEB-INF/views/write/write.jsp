@@ -78,7 +78,7 @@
 
 
 			<div class="input-group input-group-lg mt-2 mb-2">
-				<input name="r_title" class="form-control" type="text" placeholder="제목을 입력해주세요" autocomplete="off" value="${updateForm.r_title}">
+				<input name="r_title" class="form-control" type="text" placeholder="제목을 입력해주세요" autocomplete="off" maxlength="300" value="${updateForm.r_title}">
 			</div>
 
 				<c:choose>
