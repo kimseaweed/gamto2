@@ -23,106 +23,97 @@
                 <p class="">감토회원이 되어 감상토론을 나눠보세요.</p>
             </div>
 
-            <form action="newMember" method="post" name="newMember">
+            <form id="newMember" name="newMember" method="post">
                 <fieldset>
                     <legend>로그인 정보</legend>
-                    <div class="pe-2 col-12 pb-3">
+                    <div class="pe-2 col-12 ">
                         <label for="u_id" class="form-label">아이디</label>
                         <div class="input-group has-validation">
-                            <input type="text" class="form-control" id="u_id" name="u_id" placeholder="아이디" required="" autocomplete="off">
-                            <div class="invalid-feedback">
-                                아이디를 입력해주세요.
-                            </div>
+                            <input type="text"
+                                   class="form-control" id="u_id" name="u_id"
+                                   placeholder="아이디" required="" autocomplete="off"
+                                   oninput="validateInput(this)">
                         </div>
+                            <span class="validationMessage u_id"></span>
                     </div>
-                    <div class="pe-2 d-flex ">
-                        <div class="col-6 pe-md-3 pe-1">
-                            <label for="u_pw" class="form-label">비밀번호</label>
+                    <div class="pe-2 d-lg-flex ">
+                        <div class="col-lg-6 col-12 pe-lg-3 pe-1">
+                            <label for="u_pw1" class="form-label">비밀번호</label>
                             <div class="input-group has-validation">
-                                <input type="password" class="form-control" id="u_pw" name="u_pw" placeholder="비밀번호"
-                                       required>
-                                <div class="invalid-feedback">
-                                    비밀번호를 입력해주세요.
-                                </div>
+                                <input type="password"
+                                       class="form-control" id="u_pw1" name="u_pw1"
+                                       placeholder="비밀번호"
+                                       required oninput="validateInput(this)">
                             </div>
+                            <span class="validationMessage u_pw1"></span>
                         </div>
-                        <div class="col-6">
-                            <label for="u_pw" class="form-label">비밀번호 확인</label>
+                        <div class="col-lg-6 col-12">
+                            <label for="u_pw2" class="form-label">비밀번호 확인</label>
                             <div class="input-group has-validation">
-                                <input type="password" class="form-control" placeholder="비밀번호 확인" required>
-                                <div class="invalid-feedback">
-                                    비밀번호를 입력해주세요.
-                                </div>
+                                <input type="password"
+                                       id="u_pw2" name="u_pw2"
+                                       class="form-control"
+                                       placeholder="비밀번호 확인"
+                                       required oninput="validateInput(this)">
                             </div>
+                            <span class="validationMessage u_pw2"></span>
                         </div>
                     </div>
                 </fieldset>
 
                 <fieldset class="py-5">
                     <legend>회원 정보</legend>
-                    <div class="col-12 pb-4">
+                    <div class="col-12">
                         <label for="name" class="form-label">이름(닉네임)</label>
                         <div class="input-group has-validation">
-                            <input type="text" class="form-control" id="name" name="u_name" placeholder="이름(닉네임)" required="" autocomplete="off">
-                            <div class="invalid-feedback">
-                                이름(닉네임)를 입력해주세요.
-                            </div>
+                            <input type="text"
+                                   class="form-control" id="name" name="u_name"
+                                   placeholder="이름(닉네임)" required="" autocomplete="off" maxlength="6"
+                                   oninput="validateInput(this)">
                         </div>
+                        <span class="validationMessage u_name"></span>
                     </div>
-                    <div class="pb-3">
-                        <label for="email" class="form-label">이메일</label>
+                    <div class="">
+                        <label for="u_mail1" class="form-label">이메일</label>
                         <div class="row">
-                            <div class="input-group has-validation px-2 col-md col-12 mb-md-0 mb-2">
-                                <input type="email" class="form-control" id="email" name="u_mail1" placeholder="이메일"
-                                       required="">
-                                <div class="invalid-feedback">
-                                    이메일을 입력해주세요.
-                                </div>
+                            <div class="input-group px-2 col-md col-12 mb-md-0 mb-2">
+                                <input type="text" class="form-control" id="u_mail1" name="u_mail1" placeholder="이메일"
+                                       required maxlength="20" oninput="validateInput(this)">
                             </div>
                             <div class="input-group col px-md-0 pe-1">
                                 <span class="input-group-text">@</span>
-                                <input type="text" class="form-control rounded-end" id="email2"
+                                <input type="text" class="form-control rounded-end" id="u_mail2" name="u_mail2"
                                        placeholder="example.com"
-                                       required="">
-                                <div class="invalid-feedback">
-                                    메일주소를 선택해주세요.
-                                </div>
+                                       required maxlength="20" oninput="validateInput(this)">
                             </div>
                             <div class="input-group ps-1 col">
-                                <select class="form-select form-control rounded-end" id="email3" required="">
-                                    <option>직접입력</option>
-                                    <option>gmail.com</option>
-                                    <option>naver.com</option>
-                                    <option>daum.net</option>
+                                <select class="form-select form-control rounded-end" id="email3" onchange="mailSelect(this.value)">
+                                    <option value="">직접입력</option>
+                                    <option value="gmail.com" >gmail.com</option>
+                                    <option value="naver.com" >naver.com</option>
+                                    <option value="daum.net" >daum.net</option>
                                 </select>
-                                <div class="invalid-feedback">
-                                    메일주소를 선택해주세요.
-                                </div>
                             </div>
                         </div>
+                            <span class="validationMessage u_mail1 u_mail2"></span>
                     </div>
 
-                    <div class="col-12 pb-3">
+                    <div class="col-12 ">
                         <label for="name" class="form-label">연락처</label>
                         <div class="input-group has-validation">
                             <input type="text" class="form-control" id="phone" name="u_phone" placeholder="연락처"
-                                   required="">
-                            <div class="invalid-feedback">
-                                연락처를 입력해주세요.
-                            </div>
+                                   required maxlength="11" oninput="validateInput(this)">
                         </div>
+                        <span class="validationMessage u_phone"></span>
                     </div>
 
                     <div class="col-12">
                         <label for="address" class="form-label">주소</label>
                         <div class="input-group has-validation" >
-                            <input type="text" class="form-control" id="address" name="u_address" placeholder="주소"
-                                   required="" onclick="daumPostcode()">
-                            <input type="text" class="form-control" id="address2" name="u_address2" placeholder="상세주소"
-                                   required="">
-                            <div class="invalid-feedback">
-                                주소를 입력해주세요.
-                            </div>
+                            <input type="text" class="form-control " id="address" name="u_address" placeholder="주소"
+                                   required maxlength="166" onclick="daumPostcode()" readonly>
+                            <input type="text" class="form-control rounded-start " id="address2" name="u_address2" placeholder="상세주소"
+                                   required maxlength="166">
                         </div>
 
                         <!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
@@ -200,7 +191,7 @@
                     </div>
                 </fieldset>
 
-                <div class="pt-2 d-md-flex justify-content-md-end d-grid">
+                <div class="pt-2 pb-4 d-md-flex justify-content-md-end d-grid">
                     <button class="btn btn-primary px-5 py-2" type="submit">가입하기</button>
                 </div>
 
@@ -211,8 +202,6 @@
 
 <jsp:include page="../footer.jsp"/>
 
-<script>
-
-</script>
+<script src="../js/member.js"></script>
 </body>
 </html>

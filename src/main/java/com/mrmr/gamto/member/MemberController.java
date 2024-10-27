@@ -1,5 +1,6 @@
 package com.mrmr.gamto.member;
 import com.mrmr.gamto.utils.GamtoService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +12,7 @@ import com.mrmr.gamto.member.dto.MemberDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
-
+@Slf4j
 @Controller
 @RequestMapping("/member")
 public class MemberController {

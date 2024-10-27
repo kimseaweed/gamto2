@@ -17,7 +17,7 @@
 
 	<main class="container-md bg-light px-5 pt-4 rounded shadow-sm">
 
-		<form id="writeForm" name="writeForm" method="post"class="p-5 mb-4 bg-light rounded-3 needs-validation"
+		<form id="writeForm" name="writeForm" method="post" class="p-5 mb-4 bg-light rounded-3 needs-validation"
 			enctype="multipart/form-data">
 			<div class="mb-1">
 				<c:choose>
