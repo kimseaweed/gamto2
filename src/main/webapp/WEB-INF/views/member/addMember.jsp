@@ -23,7 +23,7 @@
                 <p class="">감토회원이 되어 감상토론을 나눠보세요.</p>
             </div>
 
-            <form id="newMember" name="newMember" method="post">
+            <form id="newMember" name="newMember" method="post" action="/member">
                 <fieldset>
                     <legend>로그인 정보</legend>
                     <div class="pe-2 col-12 ">
@@ -38,10 +38,10 @@
                     </div>
                     <div class="pe-2 d-lg-flex ">
                         <div class="col-lg-6 col-12 pe-lg-3 pe-1">
-                            <label for="u_pw1" class="form-label">비밀번호</label>
+                            <label for="u_pw" class="form-label">비밀번호</label>
                             <div class="input-group has-validation">
                                 <input type="password"
-                                       class="form-control" id="u_pw1" name="u_pw1"
+                                       class="form-control" id="u_pw" name="u_pw"
                                        placeholder="비밀번호"
                                        required oninput="validateInput(this)">
                             </div>
@@ -74,20 +74,20 @@
                         <span class="validationMessage u_name"></span>
                     </div>
                     <div class="">
-                        <label for="u_mail1" class="form-label">이메일</label>
+                        <label for="u_email1" class="form-label">이메일</label>
                         <div class="row">
                             <div class="input-group px-2 col-md col-12 mb-md-0 mb-2">
-                                <input type="text" class="form-control" id="u_mail1" name="u_mail1" placeholder="이메일"
+                                <input type="text" class="form-control" id="u_email1" name="u_email1" placeholder="이메일"
                                        required maxlength="20" oninput="validateInput(this)">
                             </div>
                             <div class="input-group col px-md-0 pe-1">
                                 <span class="input-group-text">@</span>
-                                <input type="text" class="form-control rounded-end" id="u_mail2" name="u_mail2"
+                                <input type="text" class="form-control rounded-end" id="u_email2" name="u_email2"
                                        placeholder="example.com"
                                        required maxlength="20" oninput="validateInput(this)">
                             </div>
                             <div class="input-group ps-1 col">
-                                <select class="form-select form-control rounded-end" id="email3" onchange="mailSelect(this.value)">
+                                <select class="form-select form-control rounded-end" id="email3" onchange="emailSelect(this.value)">
                                     <option value="">직접입력</option>
                                     <option value="gmail.com" >gmail.com</option>
                                     <option value="naver.com" >naver.com</option>
@@ -95,24 +95,24 @@
                                 </select>
                             </div>
                         </div>
-                            <span class="validationMessage u_mail1 u_mail2"></span>
+                            <span class="validationMessage u_email1 u_email2"></span>
                     </div>
 
                     <div class="col-12 ">
-                        <label for="name" class="form-label">연락처</label>
+                        <label for="u_phone" class="form-label">연락처</label>
                         <div class="input-group has-validation">
-                            <input type="text" class="form-control" id="phone" name="u_phone" placeholder="연락처"
+                            <input type="text" class="form-control" id="u_phone" name="u_phone" placeholder="연락처"
                                    required maxlength="11" oninput="validateInput(this)">
                         </div>
                         <span class="validationMessage u_phone"></span>
                     </div>
 
                     <div class="col-12">
-                        <label for="address" class="form-label">주소</label>
+                        <label for="u_address1" class="form-label">주소</label>
                         <div class="input-group has-validation" >
-                            <input type="text" class="form-control " id="address" name="u_address" placeholder="주소"
+                            <input type="text" class="form-control " id="u_address1" name="u_address1" placeholder="주소"
                                    required maxlength="166" onclick="daumPostcode()" readonly>
-                            <input type="text" class="form-control rounded-start " id="address2" name="u_address2" placeholder="상세주소"
+                            <input type="text" class="form-control rounded-start " id="u_address2" name="u_address2" placeholder="상세주소"
                                    required maxlength="166">
                         </div>
 
@@ -134,18 +134,15 @@
                             function daumPostcode() {
                                 new daum.Postcode({
                                     oncomplete: function(data) {
-                                        console.log(data)
-                                        // 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
                                         //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
                                         if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                                            document.getElementById("address").value = data.roadAddress;
+                                            document.getElementById("u_address1").value = data.roadAddress;
                                         } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                                            document.getElementById("address").value = data.jibunAddress
+                                            document.getElementById("u_address1").value = data.jibunAddress
                                         }
 
                                         // 커서를 상세주소 필드로 이동한다.
-                                        document.getElementById("address2").focus();
+                                        document.getElementById("u_address2").focus();
 
                                         // iframe을 넣은 element를 안보이게 한다.
                                         // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
@@ -190,7 +187,7 @@
 
                     </div>
                 </fieldset>
-
+                <input type="hidden" name="u_delete" value="0">
                 <div class="pt-2 pb-4 d-md-flex justify-content-md-end d-grid">
                     <button class="btn btn-primary px-5 py-2" type="submit">가입하기</button>
                 </div>

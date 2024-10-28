@@ -9,9 +9,6 @@
   	<select id="loginDao" resultType="com.mrmr.gamto.member.dto.MemberDTO">
         select * from member_function where u_id = #{param1} and u_pw=#{param2}
 	</select>
-<!--	<insert id="addMemberDao">-->
-<!--        insert into member_function values(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7})-->
-<!--	</insert>-->
 	<insert id="addMemberDao">
 		insert into member_function (u_id, u_pw, u_name, u_phone, u_email, u_address, u_delete)
 		values (#{dto.u_id}, #{dto.u_pw}, #{dto.u_name}, #{dto.u_phone}, #{dto.u_email}, #{dto.u_address}, 0)
@@ -25,11 +22,15 @@
 	<update id="updateMemberDao">
 		update member_function set u_pw=#{dto.u_pw}, u_name=#{dto.u_name}, u_phone=#{dto.u_phone} , u_email=#{dto.u_email}, u_address=#{dto.u_address} where u_id=#{dto.u_id}
 	</update>
-	<select id="overlapIdDao" resultType="com.mrmr.gamto.member.dto.MemberDTO">
-        select u_id from member_function where u_id=#{param1}
+	<select id="u_idExists" resultType="boolean">
+		SELECT CASE WHEN COUNT(u_id) > 0 THEN true ELSE false END
+		FROM member_function
+		WHERE u_id = #{param1}
 	</select>
-	<select id="overlapMailDao" resultType="com.mrmr.gamto.member.dto.MemberDTO">
-        select u_email from member_function where u_email=#{param1}
+	<select id="u_emailExists" resultType="boolean">
+		SELECT CASE WHEN COUNT(u_email) > 0 THEN true ELSE false END
+		FROM member_function
+		WHERE u_email = #{param1}
 	</select>
 	<select id="findIdDao" resultType="com.mrmr.gamto.member.dto.MemberDTO"><!-- 아이디 찾기 -->
         select * from member_function where u_email=#{param1}
@@ -40,11 +41,6 @@
 	<update id="ResetPwDo"><!-- 비번찾기 : 변경해주기 확인 -->
 		update member_function set u_pw=#{param2} where u_id=#{param1}
 	</update>
-	<!-- <select id="MyBoardDao" resultType="com.mrmr.gamto.member.dto.MyBoardDTO">
-		(select r_seq_number as seq_number, '나의생각' as tablename, r_title as title, r_regist_day as regist_day from book_report where r_writer = #{param1} and r_delete=0)
-		union
-		(select f_seq_number as seq_number, '우리생각' as tablename, f_title as title, f_regist_day as regist_day from free_board where f_writer = #{param1} and f_delete=0)
-	</select> -->
 	<select id="getPageList"  parameterType="Map" resultType="com.mrmr.gamto.member.dto.MyBoardDTO">
 	    select my.*
 		from (select rownum as rm, m.* from ((select r_seq_number as seq_number, '나의생각' as tablename, r_title as title, r_regist_day as regist_day from book_report where r_writer = #{param1} and r_delete=0)

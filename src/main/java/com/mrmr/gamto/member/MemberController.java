@@ -4,6 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mrmr.gamto.member.dao.MemberDAO;
@@ -11,6 +13,7 @@ import com.mrmr.gamto.member.dto.MemberDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Slf4j
 @Controller
@@ -18,11 +21,10 @@ import jakarta.servlet.http.HttpSession;
 public class MemberController {
 	@Autowired
 	MemberDAO dao;
-
 	@Autowired
 	GamtoService gamtoService;
 	
-	@RequestMapping()
+	@GetMapping
 	public String Member(HttpSession session) {
 		//여기에 마이페이지 이동 + 로그인 안한경우 로그인창 연결 해주세요
 		String u_id = (String)session.getAttribute("name");
@@ -79,7 +81,33 @@ public class MemberController {
 	public String resultMemberFail() {
 		return "/member/addMember";
 	}
-	
+
+	//아이디중복검사
+	@GetMapping("/api/idexists")
+	@ResponseBody
+	public boolean u_idExists(String u_id) {
+		return dao.u_idExists(u_id);
+	}
+	//이메일중복검사
+	@GetMapping("/api/emailexists")
+	@ResponseBody
+	public boolean u_emailExists(String u_email) {
+		return dao.u_emailExists(u_email);
+	}
+
+	@PostMapping
+	public String addMember(MemberDTO dto) {
+		dto.setU_pw( gamtoService.encrypt(dto.getU_pw()) );
+		try {
+			if(!dao.u_idExists(dto.getU_id()) && !dao.u_emailExists(dto.getU_email())){
+				dao.addMemberDao(dto);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/member/login";
+	}
+
 	@RequestMapping("/memberCheck")
 	public String userlistPage(Model model) {
 		model.addAttribute("list", dao.listDao());
@@ -88,32 +116,6 @@ public class MemberController {
 	@RequestMapping("/addFalseMember")
 	public String addFalseMember() {
 		return "/member/addFalseMember";
-	}
-	
-
-//	@RequestMapping("/newMember")
-//	public String newMember(MemberDTO dto,String u_email1,String u_email2) {
-//		dto.setU_email(u_email1+"@"+u_email2);
-//		if(dao.overlapIdDao(dto.getU_id()) == null &&dao.overlapMailDao(dto.getU_email())==null){
-//			dao.addMemberDao(dto.getU_id(), dto.getU_pw(), dto.getU_name(), dto.getU_phone(), dto.getU_email(), dto.getU_address(), "0");
-//			return "member/loginMemberForm";
-//		}else {
-//			return "member/addFalseMember";
-//		}
-//	}
-
-	//(비번암호화버전) 회원가입 액션
-	@RequestMapping("/newMember")
-	public String newMember(MemberDTO dto,String u_email1,String u_email2) {
-		//비번암호화
-		dto.setU_pw(gamtoService.encrypt(dto.getU_pw()));
-		dto.setU_email(u_email1+"@"+u_email2);
-		if(dao.overlapIdDao(dto.getU_id()) == null && dao.overlapMailDao(dto.getU_email())==null){
-			dao.addMemberDao(dto);
-			return "member/loginMemberForm";
-		}else {
-			return "member/addFalseMember";
-		}
 	}
 
 
