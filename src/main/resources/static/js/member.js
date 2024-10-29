@@ -94,3 +94,11 @@ $("#newMember").on("submit", (event) => {
     }
 });
 
+function dupVailCheck(){
+    $.ajax({
+        type : 'get',
+        url : '/member/api/dupVailCheck',
+        dataType : text,
+
+    })
+}

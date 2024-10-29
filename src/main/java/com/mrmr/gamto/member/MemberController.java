@@ -1,4 +1,5 @@
 package com.mrmr.gamto.member;
+import com.mrmr.gamto.member.seviec.MemberService;
 import com.mrmr.gamto.utils.GamtoService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +27,9 @@ public class MemberController {
 	MemberDAO dao;
 	@Autowired
 	GamtoService gamtoService;
-	
+    @Autowired
+    private MemberService memberService;
+
 	@GetMapping
 	public String Member(HttpSession session) {
 		//여기에 마이페이지 이동 + 로그인 안한경우 로그인창 연결 해주세요
@@ -79,50 +82,46 @@ public class MemberController {
 			// 로그인정보가 있어서 원래 가려던 페이지로 연결
 		}
 	}
-	
+
+	//회원가입폼
 	@RequestMapping("/addMember")
-	public String resultMemberFail() {
+	public String addMember() {
 		return "/member/addMember";
 	}
 
-	//중복검사
-	@GetMapping("/api/dupVailChek")
+	//중복체크 api
+	@GetMapping("/api/dupVailCheck")
 	@ResponseBody
-	public boolean u_idExists(String u_id) {
-		return dao.u_idExists(u_id);
-	}
-
-	@PostMapping
-	public String addMember(@Valid MemberDTO dto, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
-		if (bindingResult.hasErrors()){
-			model.addAttribute("headerAlert",bindingResult.getFieldError().getDefaultMessage());
-			return "member/addMember";
-		}
-		dto.setU_pw( gamtoService.encrypt(dto.getU_pw()) );
+	public int dupVailCheck(String column, String value) {
 		try {
-			if(!dao.u_idExists(dto.getU_id()) && !dao.u_emailExists(dto.getU_email())){
-				dao.addMemberDao(dto);
+			if(!memberService.dupVailCheck(column,value)){return 1;
+			}else {
+				return 0;
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("headerAlert","오류발생. 다시시도해주세요");
+			return -1;
+		}
+	}
+
+	//회원가입액션
+	@PostMapping
+	public String addMember(@Valid MemberDTO memberdto, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+		try {
+			return memberService.addMember(memberdto, bindingResult, model, redirectAttributes);
+		}catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("headerAlert", "오류발생. 다시 시도해주세요.");
 			return "member/addMember";
 		}
-		redirectAttributes.addFlashAttribute("headerAlert", "가입이 완료되었습니다. 로그인해주세요 ");
-		return "redirect:/member/login";
-
 	}
+
 
 	@RequestMapping("/memberCheck")
 	public String userlistPage(Model model) {
 		model.addAttribute("list", dao.listDao());
 		return "/member/memberCheck";
 	}
-	@RequestMapping("/addFalseMember")
-	public String addFalseMember() {
-		return "/member/addFalseMember";
-	}
-
 
 	@RequestMapping("/deleteMember")
 	public String u_delete(HttpServletRequest request) {

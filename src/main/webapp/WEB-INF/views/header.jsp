@@ -8,10 +8,16 @@
 
 <script>
 	window.onload = function() {
-		var headerAlert = "${headerAlert}";
-		if (headerAlert) {
-			alert(headerAlert);
-		}
+		var headerAlert = "${headerAlert != null ? headerAlert : ''}";
+		var headerAlertR = "${headerAlertR != null ? headerAlertR : ''}";
+		var headerAlertB = "${headerAlertB != null ? headerAlertB : ''}";
+		var headerAlertY = "${headerAlertY != null ? headerAlertY : ''}";
+
+		// 값이 있는 경우에만 alert 실행
+		if (headerAlert) alert(headerAlert);
+		if (headerAlertR) alertR(headerAlertR);
+		if (headerAlertB) alertB(headerAlertB);
+		if (headerAlertY) alertY(headerAlertY);
 	};
 </script>
 	<!-- 중앙상단 alert 토스트 -->

@@ -17,8 +17,7 @@ public interface MemberDAO {
 	int deleteMemberDao(String u_id);
 	MemberDTO readMemberDao(String u_id);
 	int updateMemberDao(@Param("dto") MemberDTO dto);
-	boolean u_idExists(String u_id);
-	boolean u_emailExists(String u_email);
+	boolean dupVailCheck(String column, String Value);
 	MemberDTO findIdDao(String u_email);
 	String ResetPwCheck(String u_id);
 	int ResetPwDo(@Param("u_id") String u_id,@Param("u_pw")String u_pw);

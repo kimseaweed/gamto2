@@ -31,9 +31,11 @@
                         <label for="u_id" class="form-label">아이디</label>
                         <div class="input-group has-validation">
                             <input type="text"
-                                   class="form-control" id="u_id" name="u_id"
+                                   class="form-control " id="u_id" name="u_id"
                                    placeholder="아이디" required="" autocomplete="off"
-                                   oninput="validateInput(this)">
+                                   oninput="validateInput(this)"
+                                   style="border-top-right-radius: 0; border-bottom-right-radius: 0">
+                            <button type="button" class="btn btn-primary" onclick="vail">중복확인</button>
                         </div>
                             <span class="validationMessage u_id"></span>
                     </div>
