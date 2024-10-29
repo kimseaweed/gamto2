@@ -36,7 +36,11 @@
   * feat : 나의생각 글 작성시 백단 유효성검사 추가
 * 24.10.26
   * refactor : addMember.jsp 기존코드 폐기 후 재작성
-        <br><br>
+* 24.10.27
+  * refactor (member.js) : addmember.jsp submit시 뷰단에서 유효성체크 재작성 
+* 24.10.28
+  * feat (MemberController.java) : addmember.jsp submit시 백단에서 유효성체크 생성
+<br><br>
 
 ## 💾 감토 구버전
 * https://github.com/kimseaweed/gamto
