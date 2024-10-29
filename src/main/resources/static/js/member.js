@@ -1,3 +1,4 @@
+
 // 메일주소 뒷부분 자동채우기
 function emailSelect(value){
     document.querySelector('#u_email2').value = value;
@@ -48,7 +49,7 @@ function validateInput(input) {
     }
 }
 
-// submit시 유효성 검사
+// submit 유효성 검사
 $("#newMember").on("submit", (event) => {
     event.preventDefault();
 
@@ -84,12 +85,12 @@ $("#newMember").on("submit", (event) => {
             $("#newMember").off("submit").submit();
             return true;
         }
-        alert('유효하지 않은 입력이 있습니다.');
+        alertR('유효하지 않은 입력이 있습니다.');
         return false;
 
     } catch (error) {
         console.error("에러발생 :", error);
-        alert("일시적인 오류가 발생했습니다. 다시 시도해 주세요.");
+        alertR("일시적인 오류가 발생했습니다. 다시 시도해 주세요.");
     }
 });
 

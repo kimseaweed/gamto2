@@ -8,6 +8,7 @@
     <title>감토 | 회원가입</title>
 </head>
 <body>
+
 <jsp:include page="../header.jsp"/>
 
 <main class="container bg-light px-5 py-4 mb-5 rounded shadow-sm " style="margin-top:150px; max-width: 800px">

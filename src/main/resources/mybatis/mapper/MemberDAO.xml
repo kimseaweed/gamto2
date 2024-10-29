@@ -23,12 +23,12 @@
 		update member_function set u_pw=#{dto.u_pw}, u_name=#{dto.u_name}, u_phone=#{dto.u_phone} , u_email=#{dto.u_email}, u_address=#{dto.u_address} where u_id=#{dto.u_id}
 	</update>
 	<select id="u_idExists" resultType="boolean">
-		SELECT CASE WHEN COUNT(u_id) > 0 THEN true ELSE false END
+		SELECT CASE WHEN COUNT(u_id) > 0 THEN 1 ELSE 0 END
 		FROM member_function
 		WHERE u_id = #{param1}
 	</select>
 	<select id="u_emailExists" resultType="boolean">
-		SELECT CASE WHEN COUNT(u_email) > 0 THEN true ELSE false END
+		SELECT CASE WHEN COUNT(u_email) > 0 THEN 1 ELSE 0 END
 		FROM member_function
 		WHERE u_email = #{param1}
 	</select>

@@ -5,6 +5,15 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 <link rel="stylesheet" href="/css/gamto.css" />
+
+<script>
+	window.onload = function() {
+		var headerAlert = "${headerAlert}";
+		if (headerAlert) {
+			alert(headerAlert);
+		}
+	};
+</script>
 	<!-- 중앙상단 alert 토스트 -->
 	<div
 		class="toast-container position-fixed start-50 translate-middle-x p-3">

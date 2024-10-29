@@ -1,9 +1,11 @@
 package com.mrmr.gamto.member;
 import com.mrmr.gamto.utils.GamtoService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +16,7 @@ import com.mrmr.gamto.member.dto.MemberDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Slf4j
 @Controller
@@ -82,21 +85,19 @@ public class MemberController {
 		return "/member/addMember";
 	}
 
-	//아이디중복검사
-	@GetMapping("/api/idexists")
+	//중복검사
+	@GetMapping("/api/dupVailChek")
 	@ResponseBody
 	public boolean u_idExists(String u_id) {
 		return dao.u_idExists(u_id);
 	}
-	//이메일중복검사
-	@GetMapping("/api/emailexists")
-	@ResponseBody
-	public boolean u_emailExists(String u_email) {
-		return dao.u_emailExists(u_email);
-	}
 
 	@PostMapping
-	public String addMember(MemberDTO dto) {
+	public String addMember(@Valid MemberDTO dto, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+		if (bindingResult.hasErrors()){
+			model.addAttribute("headerAlert",bindingResult.getFieldError().getDefaultMessage());
+			return "member/addMember";
+		}
 		dto.setU_pw( gamtoService.encrypt(dto.getU_pw()) );
 		try {
 			if(!dao.u_idExists(dto.getU_id()) && !dao.u_emailExists(dto.getU_email())){
@@ -104,8 +105,12 @@ public class MemberController {
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
+			model.addAttribute("headerAlert","오류발생. 다시시도해주세요");
+			return "member/addMember";
 		}
+		redirectAttributes.addFlashAttribute("headerAlert", "가입이 완료되었습니다. 로그인해주세요 ");
 		return "redirect:/member/login";
+
 	}
 
 	@RequestMapping("/memberCheck")
