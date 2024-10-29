@@ -94,11 +94,38 @@ $("#newMember").on("submit", (event) => {
     }
 });
 
-function dupVailCheck(){
+function dupVailCheck(column, value){
     $.ajax({
         type : 'get',
         url : '/member/api/dupVailCheck',
-        dataType : text,
-
+        // headers : {              // Http header
+        //     "Content-Type" : "application/json",
+        //     "X-HTTP-Method-Override" : "POST"
+        // },
+        dataType : JSON.stringify({
+            "column" : column,
+            "value" : value,
+        }),
+        success : function (result) {
+            let target = () => {
+                if (column == "u_id"){
+                    return "아이디"
+                }else if(column == "u_email"){
+                    return "이메일"
+                }else {
+                    return column
+                }
+            }
+            if (result==1){
+                alertB("사용 가능한 ㅇ입니다.");
+            }else if (result==0){
+                alertR("이미 사용중인 ㅇㅇ 입니다.")
+            }else {
+                alertR("일시적인 오류가 발생했습니다. 다시 시도해 주세요.");
+            }
+        },
+        error : function (result) {
+            alertR("일시적인 오류가 발생했습니다. 다시 시도해 주세요.")
+        }
     })
 }

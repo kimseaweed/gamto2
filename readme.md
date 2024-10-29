@@ -40,6 +40,8 @@
   * refactor (member.js) : addmember.jsp submit시 뷰단에서 유효성체크 재작성 
 * 24.10.28
   * feat (MemberController.java) : addmember.jsp submit시 백단에서 유효성체크 생성
+  * refactor (MemberController.java) : 회원가입로직을 Service로 이관
+  * feat (member.js) : 중복체크하는 ajax생성
 <br><br>
 
 ## 💾 감토 구버전

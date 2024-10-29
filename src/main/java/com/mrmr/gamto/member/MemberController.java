@@ -139,15 +139,6 @@ public class MemberController {
 		return "member/logoutMember";
 	}
 
-	/*
-	 * @RequestMapping("/updateMember") public String
-	 * updateMember(HttpServletRequest request, Model model) { String u_id =
-	 * request.getParameter("u_id"); System.out.println("u_id : "+u_id);
-	 * 
-	 * model.addAttribute("rows",dao.readMemberDao(u_id));
-	 * System.out.println("model : "+model.getAttribute("rows")); return
-	 * "/member/updateMember"; }
-	 */
 	 @RequestMapping("/updateMember")
 	 public String updateMember(HttpSession session, Model model) {
 	    String u_id = (String) session.getAttribute("u_id");      
