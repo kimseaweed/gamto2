@@ -95,37 +95,46 @@ $("#newMember").on("submit", (event) => {
 });
 
 function dupVailCheck(column, value){
-    $.ajax({
-        type : 'get',
-        url : '/member/api/dupVailCheck',
-        // headers : {              // Http header
-        //     "Content-Type" : "application/json",
-        //     "X-HTTP-Method-Override" : "POST"
-        // },
-        dataType : JSON.stringify({
-            "column" : column,
-            "value" : value,
-        }),
-        success : function (result) {
-            let target = () => {
-                if (column == "u_id"){
-                    return "아이디"
-                }else if(column == "u_email"){
-                    return "이메일"
-                }else {
-                    return column
+    if ( value.replace(/\s+/g, '')  == ""){
+        alertR("아이디를 입력해주세요.");
+        return
+    }else if (!u_idRegex.test(value)){
+            alertR("유효하지 않은 아이디입니다.")
+            return;
+    }else {
+        try {
+            $.ajax({
+                url : '/member/api/dupVailCheck',
+                type : 'get',
+                data :{
+                    "column" : column,
+                    "value" : value,
+                },
+                success : function (result) {
+                    let target = "";
+                    switch (column) {
+                        case "u_id" : target = "아이디"; break;
+                        case "u_email" : target = "이메일"; break;
+                        default : target = column
+                    }
+                    if (result==1){
+                        alertB(`사용 가능한 ${target}입니다.`);
+                    }else if (result==0){
+                        alertR(`이미 사용중인 ${target} 입니다.`)
+                    }else {
+                        alertR("일시적인 오류가 발생했습니다. 다시 시도해 주세요.");
+                    }
+                },
+                error : function (result) {
+                    console.log(result)
+                    alertR("일시적인 오류가 발생했습니다. 다시 시도해 주세요.")
                 }
-            }
-            if (result==1){
-                alertB("사용 가능한 ㅇ입니다.");
-            }else if (result==0){
-                alertR("이미 사용중인 ㅇㅇ 입니다.")
-            }else {
-                alertR("일시적인 오류가 발생했습니다. 다시 시도해 주세요.");
-            }
-        },
-        error : function (result) {
-            alertR("일시적인 오류가 발생했습니다. 다시 시도해 주세요.")
+            })
+        }catch (e) {
+            console.log(e);
+            alertB("통신오류입니다. 다시 시도해 주세요.");
         }
-    })
+
+
+    }
 }

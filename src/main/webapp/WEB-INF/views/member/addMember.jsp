@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>감토 | 회원가입</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
@@ -35,7 +36,7 @@
                                    placeholder="아이디" required="" autocomplete="off"
                                    oninput="validateInput(this)"
                                    style="border-top-right-radius: 0; border-bottom-right-radius: 0">
-                            <button type="button" class="btn btn-primary" onclick="vail">중복확인</button>
+                            <button type="button" class="btn btn-primary" onclick="dupVailCheck('u_id', $('#u_id').val())">중복확인</button>
                         </div>
                             <span class="validationMessage u_id"></span>
                     </div>

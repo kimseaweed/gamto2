@@ -9,6 +9,7 @@
 <html>
 <head>
 <title>관리자 페이지 | 문의 상세</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 .tablehead th{
 	width:15%;

@@ -18,6 +18,7 @@ String orderCode = (String)request.getParameter("orderCode");
 <head>
 <meta charset="UTF-8">
 <title>감토 | 책 자세히 보기</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 	<jsp:include page="../header.jsp" />

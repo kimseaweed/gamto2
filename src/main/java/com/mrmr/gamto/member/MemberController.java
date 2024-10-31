@@ -94,7 +94,8 @@ public class MemberController {
 	@ResponseBody
 	public int dupVailCheck(String column, String value) {
 		try {
-			if(!memberService.dupVailCheck(column,value)){return 1;
+			if(!memberService.dupVailCheck(column,value)){
+				return 1;
 			}else {
 				return 0;
 			}

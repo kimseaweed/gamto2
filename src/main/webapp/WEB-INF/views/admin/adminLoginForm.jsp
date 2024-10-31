@@ -9,6 +9,7 @@
 <html>
 <head>
 <title>관리자 페이지 | 로그인</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 div.form-signin{
 	max-width:500px;

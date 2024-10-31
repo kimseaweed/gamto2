@@ -10,6 +10,7 @@
 	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
 	crossorigin="anonymous">
 <title>감토 | 주문내역</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 	.c-p-t{
             padding-top: 100px;

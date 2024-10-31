@@ -24,6 +24,7 @@
 </style>
 <meta charset="UTF-8">
 <title>마이페이지</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 	<div class="col-md-1"></div>

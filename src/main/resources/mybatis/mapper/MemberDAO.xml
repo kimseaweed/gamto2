@@ -25,7 +25,7 @@
 	<select id="dupVailCheck" resultType="boolean">
 		SELECT CASE WHEN COUNT(#{param1}) > 0 THEN 1 ELSE 0 END
 		FROM member_function
-		WHERE #{param1} = #{param2}
+		WHERE ${param1} = #{param2}
 	</select>
 	<select id="findIdDao" resultType="com.mrmr.gamto.member.dto.MemberDTO"><!-- 아이디 찾기 -->
         select * from member_function where u_email=#{param1}

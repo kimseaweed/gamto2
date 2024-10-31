@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>감토 | 우리 생각</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css">
 
