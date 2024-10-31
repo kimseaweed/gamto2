@@ -41,7 +41,10 @@
 * 24.10.28
   * feat (MemberController.java) : addmember.jsp submit시 백단에서 유효성체크 생성
   * refactor (MemberController.java) : 회원가입로직을 Service로 이관
-  * feat (member.js) : 중복체크하는 ajax생성
+  * feat (member.js) : 중복체크하는 ajax 생성
+* 24.10.31
+  * feat (addMember.jsp) : 회원가입페이지에 ajax 아이디 중복체크 버튼 추가
+  * fix(askForm.jsp) : 문의 submit 안되는 오류 수정
 <br><br>
 
 ## 💾 감토 구버전

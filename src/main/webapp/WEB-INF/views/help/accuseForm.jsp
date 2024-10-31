@@ -61,10 +61,10 @@ if(uId==null){out.println("<script> alert('로그인이 필요합니다.'); wind
 					전송</button>
 			</div>
 		</form>
-<script type="text/javascript"	src="/js/memberHelp.js"></script>
 		<div class="d-none">
 			<jsp:include page="../footer.jsp" />
 		</div>
+<script type="text/javascript"	src="/js/memberHelp.js"></script>
 	</div>
 </body>
 </html>

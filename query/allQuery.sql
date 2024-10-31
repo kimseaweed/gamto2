@@ -177,7 +177,7 @@ a_id varchar2(20) null, -- 문의자 아이디
 a_category varchar2(30) not null, -- 문의 유형
 a_content varchar2(4000) not null, --문의 내용
 a_filename varchar(300) null, -- 첨부파일명
-a_email varchar2(40) not null, --문의자 이메일 주소
+a_email varchar2(40), --문의자 이메일 주소
 a_reception varchar(2) not null  CHECK (a_reception  IN ('y', 'n')), -- 메일회신 필요여부
 a_complete varchar(30) default '신규' -- 문의 처리상태
 );
