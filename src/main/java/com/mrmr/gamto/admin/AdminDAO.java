@@ -1,11 +1,10 @@
-package com.mrmr.gamto.admin.dao;
+package com.mrmr.gamto.admin;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.mrmr.gamto.admin.dto.AdminMemberDTO;
 import com.mrmr.gamto.freeboard.dto.CommentDTO;
 import com.mrmr.gamto.help.dto.AccuseDTO;
 import com.mrmr.gamto.help.dto.AskDTO;

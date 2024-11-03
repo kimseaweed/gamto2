@@ -11,8 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.mrmr.gamto.admin.dto.AdminMemberDTO;
-import com.mrmr.gamto.admin.service.AdminService;
 import com.mrmr.gamto.store.dto.StoreDTO;
 
 import jakarta.servlet.http.HttpServletRequest;

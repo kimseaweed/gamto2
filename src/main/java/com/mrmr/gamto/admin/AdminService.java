@@ -1,4 +1,4 @@
-package com.mrmr.gamto.admin.service;
+package com.mrmr.gamto.admin;
 
 import java.io.File;
 import java.security.MessageDigest;
@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import com.mrmr.gamto.admin.dao.AdminDAO;
-import com.mrmr.gamto.admin.dto.AdminMemberDTO;
 import com.mrmr.gamto.freeboard.dto.CommentDTO;
 import com.mrmr.gamto.help.dto.AccuseDTO;
 import com.mrmr.gamto.help.dto.AskDTO;

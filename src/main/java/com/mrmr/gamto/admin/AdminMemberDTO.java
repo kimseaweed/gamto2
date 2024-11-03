@@ -1,4 +1,4 @@
-package com.mrmr.gamto.admin.dto;
+package com.mrmr.gamto.admin;
 
 import lombok.Data;
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.mrmr.gamto.admin.dao.AdminDAO">
+<mapper namespace="com.mrmr.gamto.admin.AdminDAO">
 
 	<!-- 관리자계정관리 =============================== -->
 	<!-- 관리자계정 등록  -->
@@ -9,11 +9,11 @@
 		insert into admin values(#{dto.admin_id},#{dto.admin_password},#{dto.admin_number},#{dto.admin_name},4)
 	</insert>
 	<!-- 관리자계정 로그인 -->
-	<select id="selectAdminMember"	resultType="com.mrmr.gamto.admin.dto.AdminMemberDTO">
+	<select id="selectAdminMember"	resultType="com.mrmr.gamto.admin.AdminMemberDTO">
 		SELECT * from admin ${query}
 	</select>
 	<!-- 관리자계정 리스트  -->
-	<select id="adminListDao" parameterType="List"	resultType="com.mrmr.gamto.admin.dto.AdminMemberDTO">
+	<select id="adminListDao" parameterType="List"	resultType="com.mrmr.gamto.admin.AdminMemberDTO">
 		select (select count(*) from admin ) as admin_total, a.* from (select rownum as rn, a.* from (select admin.* FROM admin ${param3} )a)a
 		where rn BETWEEN ((#{param1}-1)*#{param2}+1) and (#{param1}*#{param2})
 	</select>

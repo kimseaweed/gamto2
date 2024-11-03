@@ -2,7 +2,7 @@
 <!DOCTYPE mapper 
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mrmr.gamto.write.dao.WriteDAO">
+<mapper namespace="com.mrmr.gamto.write.WriteDAO">
 	<insert id="writeBookReport">
 		insert into book_report(
 			r_seq_number,r_filename,r_title,r_writer,r_content

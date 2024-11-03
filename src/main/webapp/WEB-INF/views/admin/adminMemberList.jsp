@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ page import="java.util.*" %>
-<%@ page import="com.mrmr.gamto.admin.dto.AdminMemberDTO" %>
+<%@ page import="com.mrmr.gamto.admin.AdminMemberDTO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
@@ -93,7 +93,7 @@
                 </table>
                 <div>
                     <nav class="py-5">
-                        <ul id="" class="pagination d-flex justify-content-center">
+                        <ul class="pagination d-flex justify-content-center">
                             <li id="" class=" page-item1 mx-3"><a
                                     class="page-link" href="/admin/admin-member/${onePageNo}/1"
                                     aria-label="Previous"><span aria-hidden="true">맨앞</span></a></li>
