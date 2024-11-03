@@ -3,12 +3,14 @@ package com.mrmr.gamto.member.seviec;
 import com.mrmr.gamto.member.dao.MemberDAO;
 import com.mrmr.gamto.member.dto.MemberDTO;
 import com.mrmr.gamto.utils.GamtoService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+@Slf4j
 @Service
 public class MemberService {
     @Autowired
@@ -37,8 +39,8 @@ public class MemberService {
                 memberDAO.addMemberDao(dto);
             }
         } catch (Exception e) {
-            e.printStackTrace();
             model.addAttribute("headerAlert", "오류발생. 다시 시도해주세요.");
+            log.error("An error occurred: {}", e.getMessage(), e);
             return "member/addMember";
         }
 

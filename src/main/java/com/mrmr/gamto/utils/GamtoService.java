@@ -2,11 +2,13 @@ package com.mrmr.gamto.utils;
 import java.security.MessageDigest;
 import java.util.Base64;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import jakarta.servlet.http.HttpSession;
 
+@Slf4j
 @Component
 public class GamtoService {
 	
@@ -76,7 +78,7 @@ public class GamtoService {
             messageDigest.update(dataWithSaltAndKey.getBytes("UTF-8"));
             encryptedText = new String(Base64.getEncoder().encode(messageDigest.digest()));
         } catch (Exception e) {
-            e.printStackTrace();
+			log.error("An error occurred: {}", e.getMessage(), e);
         }
         return encryptedText;
     }

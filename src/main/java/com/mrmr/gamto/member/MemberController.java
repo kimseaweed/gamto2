@@ -1,23 +1,24 @@
 package com.mrmr.gamto.member;
 import com.mrmr.gamto.member.seviec.MemberService;
+import com.mrmr.gamto.utils.AlertUtil;
 import com.mrmr.gamto.utils.GamtoService;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.mrmr.gamto.member.dao.MemberDAO;
 import com.mrmr.gamto.member.dto.MemberDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.io.IOException;
 
 @Slf4j
 @Controller
@@ -100,7 +101,7 @@ public class MemberController {
 				return 0;
 			}
 		}catch (Exception e) {
-			e.printStackTrace();
+			log.error("An error occurred: {}", e.getMessage(), e);
 			return -1;
 		}
 	}
@@ -108,15 +109,8 @@ public class MemberController {
 	//회원가입액션
 	@PostMapping
 	public String addMember(@Valid MemberDTO memberdto, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
-		try {
-			return memberService.addMember(memberdto, bindingResult, model, redirectAttributes);
-		}catch (Exception e) {
-			e.printStackTrace();
-			model.addAttribute("headerAlert", "오류발생. 다시 시도해주세요.");
-			return "member/addMember";
-		}
+		return memberService.addMember(memberdto, bindingResult, model, redirectAttributes);
 	}
-
 
 	@RequestMapping("/memberCheck")
 	public String userlistPage(Model model) {
@@ -155,5 +149,4 @@ public class MemberController {
 		 dao.updateMemberDao(dto);
 		 return "/index";
 	}
-
 }

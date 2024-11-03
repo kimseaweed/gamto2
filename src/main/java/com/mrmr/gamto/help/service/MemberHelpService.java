@@ -38,7 +38,7 @@ public class MemberHelpService {
 	private static final String SENDER = "gamt5476@gmail.com";
 	
 	/** 메일발송하기 <br>
-	 * @param u_name : 이메일로 검색한 결과와 입력값이 일치하는지 확인한다
+	 * @param  : 이메일로 검색한 결과와 입력값이 일치하는지 확인한다
 	 * @param u_email : 이메일을 기준으로 검색한다
 	 * @return2 : 이메일에 맞는 검색결과가 null
 	 * @return1 : 검색된결과와 입력한 이름이 일치하지 않음
@@ -52,7 +52,7 @@ public class MemberHelpService {
 			message.setSubject(messageSubject);
 			message.setText(messageBody, "utf-8", "html");
 		} catch (MessagingException e) {
-			e.printStackTrace();
+			log.error("An error occurred: {}", e.getMessage(), e);
 		}
 		javaMailSender.send(message);
 		log.debug(messageSubject+"로 메일 발송");

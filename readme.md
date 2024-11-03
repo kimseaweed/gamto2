@@ -45,6 +45,8 @@
 * 24.10.31
   * feat (addMember.jsp) : 회원가입페이지에 ajax 아이디 중복체크 버튼 추가
   * fix(askForm.jsp) : 문의 submit 안되는 오류 수정
+* 24.11.3
+  * refactor(AdminController.java) : 모든 로직 AdminService.java로 이동
 <br><br>
 
 ## 💾 감토 구버전

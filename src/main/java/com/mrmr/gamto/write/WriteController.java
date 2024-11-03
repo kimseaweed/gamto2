@@ -41,7 +41,7 @@ public class WriteController {
 			dto.setR_filename(service.saveFile(filename));
 			writedao.writeBookReport(dto);
 		}catch (Exception e) {
-			e.printStackTrace();
+			log.error("An error occurred: {}", e.getMessage(), e);
 		}
 		return "redirect:/report";
 	}
