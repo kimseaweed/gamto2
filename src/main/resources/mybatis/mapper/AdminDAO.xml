@@ -41,7 +41,7 @@
 		update member_function set u_delete = #{state} where u_id = #{u_id}
 	</update>
 	<!-- 문의전체보기 -->
-	<select id="askListDao" parameterType="List" resultType="com.mrmr.gamto.help.dto.AskDTO">
+	<select id="askListDao" parameterType="List" resultType="com.mrmr.gamto.help.AskDTO">
 	select
 		(select count(*)from ask) as a_total,
 			CASE
@@ -71,7 +71,7 @@
 	</select>
 	<!-- 문의상세보기 -->
 	<select id="askViewDao"
-		resultType="com.mrmr.gamto.help.dto.AskDTO">
+		resultType="com.mrmr.gamto.help.AskDTO">
 		SELECT (select count(*) from ask ) as a_total,ask.* FROM ask WHERE a_seq_number=#{a_seq_number}
 	</select>
 	<!-- 문의진행사항 변경 -->
@@ -84,7 +84,7 @@
 	<!-- 신고관리기능 -->
 	<!-- 신고전체보기 -->
 	<select id="accuseListDao" parameterType="List"
-		resultType="com.mrmr.gamto.help.dto.AccuseDTO">
+		resultType="com.mrmr.gamto.help.AccuseDTO">
 		select
 			(select count(*)from accuse) as ac_total,
 				CASE
@@ -117,7 +117,7 @@
 	</select>
 	<!-- 신고상세보기 -->
 	<select id="accuseViewDao"
-		resultType="com.mrmr.gamto.help.dto.AccuseDTO">
+		resultType="com.mrmr.gamto.help.AccuseDTO">
 		SELECT (select count(*) from accuse ) as ac_total,  accuse.* FROM accuse WHERE ac_seq_number=#{ac_seq_number}
 	</select>
 

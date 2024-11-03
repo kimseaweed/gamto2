@@ -48,6 +48,7 @@
 * 24.11.3
   * refactor(AdminController.java) : AdminService.java로 로직 이동
   * refactor(WriteController.java) : WriteService.java로 로직 이동
+  * refactor(MemberHelpController.java) : NenberHelpService.java로 로직 이동
 <br><br>
 
 ## 💾 감토 구버전

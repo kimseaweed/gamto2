@@ -6,8 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.mrmr.gamto.freeboard.dto.CommentDTO;
-import com.mrmr.gamto.help.dto.AccuseDTO;
-import com.mrmr.gamto.help.dto.AskDTO;
+import com.mrmr.gamto.help.AccuseDTO;
+import com.mrmr.gamto.help.AskDTO;
 import com.mrmr.gamto.member.dto.MemberDTO;
 import com.mrmr.gamto.member.dto.MyBoardDTO;
 import com.mrmr.gamto.store.dto.StoreDTO;

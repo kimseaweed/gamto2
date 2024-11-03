@@ -1,4 +1,4 @@
-package com.mrmr.gamto.help.dto;
+package com.mrmr.gamto.help;
 
 import lombok.Data;
 

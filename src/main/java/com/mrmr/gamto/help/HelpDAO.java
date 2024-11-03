@@ -1,10 +1,7 @@
-package com.mrmr.gamto.help.dao;
+package com.mrmr.gamto.help;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
-import com.mrmr.gamto.help.dto.AccuseDTO;
-import com.mrmr.gamto.help.dto.AskDTO;
 
 @Mapper
 public interface HelpDAO {

@@ -122,24 +122,6 @@ public class ReportController {
 		}	
 	}
 	
-	/*
-	 * @RequestMapping("/update") public String update(HttpSession session,
-	 * BookReportDTO dto, Model model) {
-	 * System.out.println("아ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ : "+dto.getR_filename());
-	 * String u_id = (String)session.getAttribute("u_id");
-	 * 
-	 * if(u_id.equals(dto.getR_writer())) { Map<String,String> map = new
-	 * HashMap<String,String>(); dto.setR_filename(service.saveFile(filename));
-	 * map.put("item1", dto.getR_title()); map.put("item2", dto.getR_content());
-	 * map.put("item3", dto.getR_filename()); map.put("item4",
-	 * Integer.toString(dto.getR_seq_number())); dao.updateDao(map);
-	 * 
-	 * return
-	 * "redirect:/report/view?r_seq_number="+Integer.toString(dto.getR_seq_number())
-	 * ; }else { model.addAttribute("script",
-	 * "<script>alert('권한이없습니다.');history.back();</script>"); return "script"; } }
-	 */
-	
 	@RequestMapping("/good")
 	public String goodCount(HttpServletRequest request, Model model) {
 		String rId = request.getParameter("r_seq_number");

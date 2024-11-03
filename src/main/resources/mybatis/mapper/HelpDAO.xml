@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.mrmr.gamto.help.dao.HelpDAO">
+<mapper namespace="com.mrmr.gamto.help.HelpDAO">
 <!-- 문의접수  -->
 <insert id="insertAskDao">
 insert into ask(a_id,a_category,a_content,a_filename,a_email,a_reception)
