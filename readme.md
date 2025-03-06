@@ -2,7 +2,7 @@
 
 [팀프로젝트] 독서감상 토론회 '감토' 
 23.07.27 ~ 23.08.24 => <br>
-[개인프로젝트] '감토' 수정 및 업그레이드 24.10.20 ~  진행중
+[개인프로젝트] '감토' 수정 및 업그레이드 24.10.20 ~  
 <br><br>
 
 ## 💡 소개
@@ -17,7 +17,7 @@
   <br><br>
 
 ## 🔧 사용 스택
-* Frontend : Html·CSS, JavaScript, jquery, ajax, JSP, BootStrap
+* Frontend : jquery, ajax
 * Backend : SpringBoot(Gradle), Oracle
 * API : kakao map, daum검색, i'port(kakao pay)
 * Deploy : Oracle Cloud, Nginx, tomcat(SpringBoot)
