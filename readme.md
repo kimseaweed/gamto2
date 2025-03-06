@@ -38,5 +38,3 @@
   * refactor : addMember.jsp 기존코드 폐기 후 재작성
         <br><br>
 
-## 💾 감토 구버전
-* https://github.com/kimseaweed/gamto
